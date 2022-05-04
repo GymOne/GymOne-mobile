@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/profileFragment">
+
+<!--    Profile-->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.gym_mobile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+<!--    Tracking-->
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.example.gym_mobile.TrackingFragment"
+        android:label="fragment_tracking"
+        tools:layout="@layout/fragment_tracking" >
+        <action
+            android:id="@+id/action_trackingFragment_to_exercisesFragment"
+            app:destination="@id/exercisesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.example.gym_mobile.ExercisesFragment"
+        android:label="fragment_exercises"
+        tools:layout="@layout/fragment_exercises">
+        <action
+            android:id="@+id/action_exercisesFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+
+<!--    Friends-->
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="com.example.gym_mobile.FriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" />
+
+</navigation>
