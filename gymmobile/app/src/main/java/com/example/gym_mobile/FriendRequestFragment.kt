@@ -6,25 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.gym_mobile.databinding.FragmentFriendRequestBinding
 import com.example.gym_mobile.databinding.FragmentFriendsBinding
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 
-class FriendsFragment : Fragment() {
+class FriendRequestFragment : Fragment() {
 
-    private lateinit var binding: FragmentFriendsBinding
+    private lateinit var binding: FragmentFriendRequestBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFriendsBinding.inflate(inflater, container, false)
+        binding = FragmentFriendRequestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnGoToFriendRequests.setOnClickListener {
-            findNavController().navigate(R.id.action_friendsFragment_to_friendRequestFragment)
+        binding.btnGoToFriends.setOnClickListener {
+            findNavController().navigate(R.id.action_friendRequestFragment_to_friendsFragment)
         }
     }
 }

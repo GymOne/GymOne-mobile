@@ -31,6 +31,9 @@ class ExercisesFragment : Fragment() {
         binding.btnGoBackFromExercises.setOnClickListener {
             findNavController().navigate(R.id.action_exercisesFragment_to_trackingFragment)
         }
+        binding.btnGoToCreateNewExercise.setOnClickListener {
+            findNavController().navigate(R.id.action_exercisesFragment_to_createNewExerciseFragment)
+        }
         listView = view.findViewById(R.id.exerciseList);
 
         val user = arrayOf("Squat","Leg press","Lunge","Deadlift","Leg extension","Leg curl","Standing calf raise","Seated calf raise","Hip adductor","Bench press",

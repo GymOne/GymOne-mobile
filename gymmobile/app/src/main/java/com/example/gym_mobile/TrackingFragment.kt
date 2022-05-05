@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 
-
 class TrackingFragment : Fragment() {
 
     private lateinit var binding: FragmentTrackingBinding

@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_exercisesFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
+        <action
+            android:id="@+id/action_exercisesFragment_to_createNewExerciseFragment"
+            app:destination="@id/createNewExerciseFragment" />
     </fragment>
 
 <!--    Friends-->
@@ -38,6 +41,28 @@
         android:id="@+id/friendsFragment"
         android:name="com.example.gym_mobile.FriendsFragment"
         android:label="fragment_friends"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friendsFragment_to_friendRequestFragment"
+            app:destination="@id/friendRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendRequestFragment"
+        android:name="com.example.gym_mobile.FriendRequestFragment"
+        android:label="fragment_friend_request"
+        tools:layout="@layout/fragment_friend_request" >
+        <action
+            android:id="@+id/action_friendRequestFragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNewExerciseFragment"
+        android:name="com.example.gym_mobile.CreateNewExerciseFragment"
+        android:label="fragment_create_new_exercise"
+        tools:layout="@layout/fragment_create_new_exercise" >
+        <action
+            android:id="@+id/action_createNewExerciseFragment_to_exercisesFragment"
+            app:destination="@id/exercisesFragment" />
+    </fragment>
 
 </navigation>
