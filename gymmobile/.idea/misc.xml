@@ -10,10 +10,13 @@
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/drawable/search_bg.xml" value="0.173" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_create_new_exercise.xml" value="0.24139492753623187" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_exercises.xml" value="0.264" />
-        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_friends.xml" value="0.1" />
-        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_tracking.xml" value="0.1" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_friend_request.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_friends.xml" value="0.264" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_my_friends.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_tracking.xml" value="0.264" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2682291666666667" />
       </map>
