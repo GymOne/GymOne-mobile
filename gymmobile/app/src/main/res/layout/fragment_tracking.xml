@@ -7,6 +7,20 @@
     android:background="@color/green_100"
     tools:context=".TrackingFragment">
 
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="316dp"
+        android:layout_height="123dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -19,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.562" />
 
     <Button
         android:id="@+id/btnGoToExercises"
