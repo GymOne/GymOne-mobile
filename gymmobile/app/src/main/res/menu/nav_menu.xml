@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_profile_24"
-        android:title="Profile" />
+        android:title="Profile"
+        app:showAsAction="never" />
     <item
         android:id="@+id/trackingFragment"
         android:icon="@drawable/ic_baseline_tracking_24"
-        android:title="Tracking" />
+        android:title="Tracking"
+        app:showAsAction="never" />
     <item
         android:id="@+id/friendsFragment"
         android:icon="@drawable/ic_baseline_friends_24"
-        android:title="Friends" />
+        android:title="Friends"
+        app:showAsAction="never" />
 
 </menu>
