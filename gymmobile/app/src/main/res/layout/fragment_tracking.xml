@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,44 +7,54 @@
     android:background="@color/green_100"
     tools:context=".TrackingFragment">
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="316dp"
-        android:layout_height="123dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Tracking Fragment"
-        android:textColor="@color/green_700"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/btnGoToExercises"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="💪 Exercises"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+            <Button
+                android:id="@+id/selectDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📅" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/btnGoToExercises"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="💪 Exercises" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tracking Fragment"
+                android:textColor="@color/green_700"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/addNewSet"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Add new set" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
