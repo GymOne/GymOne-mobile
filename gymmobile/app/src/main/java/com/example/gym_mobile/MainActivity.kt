@@ -21,9 +21,5 @@ class MainActivity : AppCompatActivity() {
 
         navController= Navigation.findNavController(this,R.id.activity_main_nav_host_fragment)
         setupWithNavController(binding.bottomNavigationView,navController)
-        var _authService =  AuthService()
-        _authService.apiCall(this)
-
-
     }
 }
