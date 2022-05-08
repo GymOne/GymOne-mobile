@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".RegisterActivity"
+            android:usesCleartextTraffic="true"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
