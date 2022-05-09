@@ -11,12 +11,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_add_set.*
+import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 
 class TrackingFragment : Fragment() {
@@ -41,6 +45,13 @@ class TrackingFragment : Fragment() {
         }
 //----------Date Picker
 
+        var input = ""
+        var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
+        if (myInputField != null) {
+            myInputField.doOnTextChanged { text, start, before, count ->
+                Log.d("LOG", myInputField.text.toString())
+            }
+        }
 
         return binding.root
     }
@@ -51,6 +62,7 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
+        weightInput
         addNewSet.setOnClickListener(){
             val newFragment = onCreateDialog(savedInstanceState)
             newFragment.show()
@@ -65,23 +77,36 @@ class TrackingFragment : Fragment() {
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
 
+            fun saveDetails(){
+                var weightsInput = weightInput.text.toString()
+                var setsInput = setInput.text.toString()
+//                textView.setText(weightsInput)
+
+            }
+
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(inflater.inflate(R.layout.fragment_add_set, null))
 
-            builder.setPositiveButton("Save") { dialog, which ->
+            if (weightInput !== null ){
+                weightInput.doOnTextChanged { text, start, before, count ->
+                    Log.d("Debugging DDDD","On text changed listener")
+                }
 
-                Toast.makeText(binding.root.context, "Saved", Toast.LENGTH_SHORT).show()
+            }
+
+            builder.setPositiveButton("Save") { dialog, which ->
+                Log.d("Debugging DDDD","jvsjdh")
+            //                var weightsInput = weightInput.text.toString()
+//                Toast.makeText(binding.root.context, weightsInput, Toast.LENGTH_SHORT).show()
             }
 
             builder.setNegativeButton("Cancel") { dialog, which ->
-
-                Toast.makeText(binding.root.context, "Cancel", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+                Toast.makeText(binding.root.context, "Canceled", Toast.LENGTH_SHORT).show()
             }
-                // Add action buttons
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
 }

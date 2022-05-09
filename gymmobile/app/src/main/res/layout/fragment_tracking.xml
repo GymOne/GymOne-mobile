@@ -30,30 +30,43 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="💪 Exercises" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Tracking Fragment"
-                android:textColor="@color/green_700"
-                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/addNewSet"
-                android:layout_width="190dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Add new set" />
+                android:text="+" />
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/setList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textViewTracking"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Tracking Fragment"-->
+<!--                android:textColor="@color/green_700"-->
+<!--                android:textSize="30sp" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/addNewSet"-->
+<!--                android:layout_width="190dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="15dp"-->
+<!--                android:text="Add new set" />-->
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
