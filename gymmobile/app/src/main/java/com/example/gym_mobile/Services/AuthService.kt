@@ -13,7 +13,7 @@ import org.json.JSONObject
 
 class AuthService {
     //val url = "https://pastebin.com/raw/2bW31yqa"
-    val url = "http://10.0.2.2:3000/friend/getRequestsByEmail/sender%40g.com"
+    val url = "http://localhost:3000/friend/getRequestsByEmail/sender%40g.com"
 
     fun apiCall(mainActivity: LoginActivity, textView: TextView) {
 
