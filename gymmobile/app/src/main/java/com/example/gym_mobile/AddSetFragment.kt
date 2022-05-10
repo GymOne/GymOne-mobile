@@ -21,5 +21,4 @@ import kotlinx.android.synthetic.main.fragment_add_set.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 
 class AddSetFragment : DialogFragment() {
-
 }
