@@ -1,24 +1,20 @@
 package com.example.gym_mobile
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ListView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_add_set.*
 import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
@@ -26,6 +22,10 @@ import kotlinx.android.synthetic.main.fragment_tracking.*
 class TrackingFragment : Fragment() {
 
     private lateinit var binding: FragmentTrackingBinding
+
+    lateinit var weights: TextInputEditText
+
+    lateinit var reps: TextInputEditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,41 +64,34 @@ class TrackingFragment : Fragment() {
         }
         weightInput
         addNewSet.setOnClickListener(){
-            val newFragment = onCreateDialog(savedInstanceState)
+            val newFragment = onCreateDialog(view,savedInstanceState)
             newFragment.show()
             Log.d("LOG", "trying to open")
         }
     }
 
+    private fun onCreateDialog(view: View, savedInstanceState: Bundle?): Dialog {
 
-    private fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
 
-            fun saveDetails(){
-                var weightsInput = weightInput.text.toString()
-                var setsInput = setInput.text.toString()
-//                textView.setText(weightsInput)
+            val DialogView = inflater.inflate(R.layout.fragment_add_set, null)
 
-            }
-
+            weights = DialogView.findViewById(R.id.weightInput)
+            reps = DialogView.findViewById(R.id.setInput)
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.fragment_add_set, null))
-
-            if (weightInput !== null ){
-                weightInput.doOnTextChanged { text, start, before, count ->
-                    Log.d("Debugging DDDD","On text changed listener")
-                }
-
-            }
+            builder.setView(DialogView)
 
             builder.setPositiveButton("Save") { dialog, which ->
                 Log.d("Debugging DDDD","jvsjdh")
-            //                var weightsInput = weightInput.text.toString()
-//                Toast.makeText(binding.root.context, weightsInput, Toast.LENGTH_SHORT).show()
+
+                    println(weights.text)
+                    println(reps.text)
+                Toast.makeText(binding.root.context, weights.text.toString() + "" +reps.text.toString() , Toast.LENGTH_SHORT).show()
+
             }
 
             builder.setNegativeButton("Cancel") { dialog, which ->
