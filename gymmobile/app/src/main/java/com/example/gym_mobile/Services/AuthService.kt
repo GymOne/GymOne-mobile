@@ -3,17 +3,19 @@ import android.util.Log
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.gym_mobile.LoginActivity
 import com.google.android.material.textfield.TextInputLayout
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
 class AuthService {
     //val url = "https://pastebin.com/raw/2bW31yqa"
-    val url = "http://localhost:3000/friend/getRequestsByEmail/sender%40g.com"
+    val url = "http://10.0.2.2:3000/friend/getRequestsByEmail/sender@g.com"
 
     fun apiCall(mainActivity: LoginActivity, textView: TextView) {
 
@@ -22,22 +24,22 @@ class AuthService {
 
 
 
-        val request = JsonObjectRequest(
+        val request = JsonArrayRequest(
             Request.Method.GET, // method
             url, // url
             null, // json request
             { response -> // response listener
 
                 try {
-                    val obj: JSONObject = response
-                    val array = obj.getJSONArray("students")
+                    println(response)
+                    val obj: JSONArray = response
 
                     textView.text = ""
 
                     // loop through the array elements
-                    for (i in 0 until  array.length()){
+                    for (i in 0 until  obj.length()){
                         // get current json object as student instance
-                        val student: JSONObject = array.getJSONObject(i)
+                        val student: JSONObject = obj.getJSONObject(i)
 
                         // get the current student (json object) data
                         val id: String = student.getString("_id")
@@ -54,6 +56,7 @@ class AuthService {
 
             },
             { error -> // error listener
+                println(error)
                 textView.text = error.message
             }
         )
