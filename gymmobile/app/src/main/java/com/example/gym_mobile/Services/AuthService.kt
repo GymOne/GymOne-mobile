@@ -35,7 +35,6 @@ class AuthService {
                         val sender: String = student.getString("senderId")
                         val receiver: String = student.getString("receiverId")
 
-                        //display the formatted json data in text view
                     }
 
                 }catch (e: JSONException){
