@@ -133,6 +133,10 @@ class AuthService {
             { response ->
                 // Process the json
                 try {
+                    if(response.toString().contains("id")){
+                        //need to add token
+                        activity.openMainActivity()
+                    }
                     println(response)
                     //activity.openMainActivity(NotProud(response))
                     //var responseObject =  JSON.parse

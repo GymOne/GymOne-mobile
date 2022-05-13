@@ -32,9 +32,8 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    fun openMainActivity(token: String){
+    fun openMainActivity(){
         val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, token)
         }
         startActivity(intent)
     }
