@@ -35,7 +35,6 @@ class AuthService {
                         val sender: String = student.getString("senderId")
                         val receiver: String = student.getString("receiverId")
 
-                        //display the formatted json data in text view
                     }
 
                 }catch (e: JSONException){
@@ -134,6 +133,10 @@ class AuthService {
             { response ->
                 // Process the json
                 try {
+                    if(response.toString().contains("id")){
+                        //need to add token
+                        activity.openMainActivity()
+                    }
                     println(response)
                     //activity.openMainActivity(NotProud(response))
                     //var responseObject =  JSON.parse
