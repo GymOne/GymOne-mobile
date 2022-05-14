@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gym_mobile.Services.AuthService
-import com.example.gym_mobile.Services.LoginDto
+import com.example.gym_mobile.Services.Dtos.LoginDto
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -33,8 +33,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun openMainActivity(){
-        val intent = Intent(this, MainActivity::class.java).apply {
-        }
-        startActivity(intent)
+        startActivity(Intent(this, MainActivity::class.java).apply {})
     }
 }

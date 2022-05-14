@@ -1,4 +1,4 @@
-package com.example.gym_mobile.Services
+package com.example.gym_mobile.Services.Dtos
 
 class LoginDto(var email: String, var password: String, var name: String?, var jwtToken: String?){
 
