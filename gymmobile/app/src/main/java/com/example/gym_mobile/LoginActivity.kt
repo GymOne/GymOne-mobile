@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gym_mobile.Services.AuthService
-import com.example.gym_mobile.Services.LoginDto
+import com.example.gym_mobile.Services.Dtos.LoginDto
 import kotlinx.android.synthetic.main.activity_login.*
 
 const val EXTRA_MESSAGE = "token_from_login"
@@ -32,10 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun openMainActivity(token: String){
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, token)
-        }
-        startActivity(intent)
+    fun openMainActivity(){
+        startActivity(Intent(this, MainActivity::class.java).apply {})
     }
 }

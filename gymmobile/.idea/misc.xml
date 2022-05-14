@@ -27,7 +27,9 @@
         <entry key="app/src/main/res/layout/fragment_add_set.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/fragment_create_new_exercise.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/fragment_exercises.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tracking.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.20729166666666668" />
       </map>
     </option>
   </component>
