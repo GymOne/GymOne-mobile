@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.gym_mobile.Services.AuthService
 import com.example.gym_mobile.databinding.ActivityMainBinding
 
 
