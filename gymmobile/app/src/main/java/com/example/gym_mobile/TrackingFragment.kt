@@ -3,27 +3,29 @@ package com.example.gym_mobile
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
-import com.example.gym_mobile.Entities.Exercise
+import com.example.gym_mobile.Entities.Workout.WorkoutExercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
+import com.example.gym_mobile.Entities.Workout.WorkoutSet
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
-import com.example.gym_mobile.Repository.ExercisesRepo
 import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_add_set.*
-import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,7 +67,6 @@ class TrackingFragment : Fragment() {
         var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
         if (myInputField != null) {
             myInputField.doOnTextChanged { text, start, before, count ->
-                Log.d("LOG", myInputField.text.toString())
             }
         }
 
@@ -80,18 +81,80 @@ class TrackingFragment : Fragment() {
                 override fun onResponse(
                     call: Call<WorkoutSession>,
                     response: Response<WorkoutSession>
+
                 ) {
                     val session = response.body() as WorkoutSession
-                    Log.d("Response", session.workouts.toString())
+                    val adapter = WorkoutExerciseAdapter(
+                        context as Context,
+                        session.workouts as MutableList<WorkoutExercise>
+                    )
+                    lv_workouts.adapter = adapter;
+
                 }
 
                 override fun onFailure(call: Call<WorkoutSession>, t: Throwable) {
-                    //Log.d("Response", t.toString())
+
                 }
 
             })
     }
 
+    internal class WorkoutExerciseAdapter(context: Context, private val workout:MutableList<WorkoutExercise>) : ArrayAdapter<WorkoutExercise>(context,0,workout){
+
+        private val colours = intArrayOf(
+            Color.parseColor("#AAAAAA"),
+            Color.parseColor("#CCCCCC")
+        )
+
+        override fun getView(position: Int, v: View?, parent: ViewGroup): View {
+            var v1: View? = v
+            if (v1 == null) {
+                val mInflater = LayoutInflater.from(context)
+                v1 = mInflater.inflate(R.layout.adapter_workout_exercise_layout, null)
+
+            }
+            val resView: View = v1!!
+            resView.setBackgroundColor(colours[position % colours.size])
+            val e = workout[position]
+            val nameView = resView.findViewById<TextView>(R.id.tv_workoutExerciseName)
+            nameView.text = e.exercise.name
+            val fakeSets = mutableListOf(WorkoutSet(_id = "sa",weight = 10,reps = 10),WorkoutSet(_id = "sa",weight = 10,reps = 10),WorkoutSet(_id = "sa",weight = 10,reps = 10))
+            val setView = resView.findViewById<ListView>(R.id.lv_exerciseSet)
+            val adapter = WorkoutExerciseSetAdapter(
+                context,
+                fakeSets
+            )
+            setView.adapter = adapter;
+
+
+            return resView
+        }
+    }
+
+    internal class WorkoutExerciseSetAdapter(context: Context, private val exerciseSet:MutableList<WorkoutSet>) : ArrayAdapter<WorkoutSet>(context,0,exerciseSet){
+
+        private val colours = intArrayOf(
+            Color.parseColor("#AAAAAA"),
+            Color.parseColor("#CCCCCC")
+        )
+
+        override fun getView(position: Int, v: View?, parent: ViewGroup): View {
+            var v1: View? = v
+            if (v1 == null) {
+                val mInflater = LayoutInflater.from(context)
+                v1 = mInflater.inflate(R.layout.adapter_workout_sets_layout, null)
+
+            }
+            val resView: View = v1!!
+            //resView.setBackgroundColor(colours[position % colours.size])
+            val set = exerciseSet[position]
+            val weightTextView = resView.findViewById<TextView>(R.id.tv_weight)
+            val repsTextView = resView.findViewById<TextView>(R.id.tv_reps)
+            weightTextView.text = set.weight.toString()
+            repsTextView.text = set.reps.toString()
+            return resView
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -102,7 +165,6 @@ class TrackingFragment : Fragment() {
         addNewSet.setOnClickListener(){
             val newFragment = onCreateDialog(view,savedInstanceState)
             newFragment.show()
-            Log.d("LOG", "trying to open")
         }
     }
 
@@ -122,7 +184,6 @@ class TrackingFragment : Fragment() {
             builder.setView(DialogView)
 
             builder.setPositiveButton("Save") { dialog, which ->
-                Log.d("Debugging DDDD","jvsjdh")
 
                     println(weights.text)
                     println(reps.text)
