@@ -3,13 +3,14 @@ package com.example.gym_mobile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.gym_mobile.Services.AuthService
-import com.example.gym_mobile.Services.Dtos.LoginDto
+import com.example.gym_mobile.Dto.RegisterDto
+import com.example.gym_mobile.Repository.ApiConnector
+import com.example.gym_mobile.Repository.AuthRepo
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
-
-    val _authService = AuthService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,19 +21,21 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        button.setOnClickListener {
-            register()
+        btnRegister.setOnClickListener {
+            var registerDto = RegisterDto(registerNameInput.text.toString(), registerEmailInput.text.toString(), registerPasswordInput.text.toString() )
+
+            val authAPi = ApiConnector.getInstance().create(AuthRepo::class.java)
+
+            GlobalScope.launch {
+                val result = authAPi.register(registerDto)
+                if(result.isSuccessful){
+                    goToLogin()
+                }
+            }
         }
     }
 
-    private fun register() {
-        var registerDto = LoginDto(registerNameInput.text.toString(), registerEmailInput.text.toString(), registerPasswordInput.text.toString() )
-        println(registerDto.name + registerDto.email + registerDto.password)
-        _authService.register(registerDto, this)
-
-    }
-
-    fun openMainActivity(){
-        startActivity(Intent(this, MainActivity::class.java).apply {})
+    fun goToLogin(){
+        startActivity(Intent(this, LoginActivity::class.java).apply {})
     }
 }
