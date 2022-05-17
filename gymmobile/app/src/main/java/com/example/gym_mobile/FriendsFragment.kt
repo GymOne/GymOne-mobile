@@ -41,7 +41,7 @@ class FriendsFragment : Fragment() {
         binding.btnGoToFriendRequests.setOnClickListener {
             findNavController().navigate(R.id.action_friendsFragment_to_friendRequestFragment)
         }
-        listFriends = view.findViewById(R.id.exerciseList);
+        listFriends = view.findViewById(R.id.listasViewas);
 
         _friendRepo.getFriendsByEmail(email).enqueue(object:
             Callback<List<Friend>> {

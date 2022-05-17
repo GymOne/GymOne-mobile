@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface FriendsRepo {
-    @GET("/exercise/findByUserId/{email}")
+    @GET("friend/getRequestsByEmail/{email}")
     fun getFriendsByEmail(@Path("email") email: String?) : Call<List<Friend>>
 }
