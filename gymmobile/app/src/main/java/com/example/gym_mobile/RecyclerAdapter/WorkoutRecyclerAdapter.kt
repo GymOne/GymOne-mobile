@@ -1,0 +1,62 @@
+package com.example.gym_mobile.RecyclerAdapter
+
+import android.content.Context
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gym_mobile.Entities.Workout.WorkoutExercise
+import com.example.gym_mobile.R
+import kotlinx.android.synthetic.main.adapter_workout_sets_layout.view.*
+import kotlinx.android.synthetic.main.layout_workout_exercise_item.view.*
+
+class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var items: List<WorkoutExercise> = ArrayList()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return WorkoutExerciseViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context
+        )
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder){
+            is WorkoutExerciseViewHolder -> {
+                holder.bind(items.get(position))
+            }
+        }
+    }
+
+    override fun getItemCount(): Int {
+        Log.d("SIZE",items.size.toString())
+        return items.size
+    }
+
+    fun submitList(workoutExerciseList:List<WorkoutExercise>){
+        items = workoutExerciseList
+
+    }
+
+    class WorkoutExerciseViewHolder constructor(
+        itemView: View, context: Context
+    ) : RecyclerView.ViewHolder(itemView){
+        val exerciseName = itemView.exercise_name
+        val setsLayout = itemView.sets_layout
+        val context = context
+
+
+
+        fun bind(workoutExercise:WorkoutExercise){
+            exerciseName.setText(workoutExercise.exercise.name)
+            val layoutInflater:LayoutInflater = LayoutInflater.from(context)
+            workoutExercise.sets.forEach(){
+                val view = layoutInflater.inflate(R.layout.adapter_workout_sets_layout, null)
+                view.tv_weight.setText(it.weight.toString());
+                view.tv_reps.setText(it.reps.toString());
+                setsLayout.addView(view)
+            }
+        }
+    }
+}
