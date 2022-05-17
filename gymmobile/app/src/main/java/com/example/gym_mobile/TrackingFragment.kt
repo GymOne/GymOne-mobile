@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -106,13 +107,20 @@ class TrackingFragment : Fragment() {
     }
 
     private fun initRecyclerView(){
-        recycler_view.apply {
-            layoutManager = LinearLayoutManager(context as Context)
+
+        recycler_view.layoutManager = LinearLayoutManager(context as Context)
             val topSpaceDecoration = TopItemSpaceDecoration(10)
-            addItemDecoration(topSpaceDecoration)
+        recycler_view.addItemDecoration(topSpaceDecoration)
             workoutExerciseAdapter = WorkoutRecyclerAdapter()
-            adapter = workoutExerciseAdapter
-        }
+        recycler_view.adapter = workoutExerciseAdapter
+        (recycler_view.adapter as WorkoutRecyclerAdapter).setOnItemClickListener(object : WorkoutRecyclerAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val workoutExerciseClick = workoutExerciseAdapter.items.get(position).exercise.name;
+                Toast.makeText(context as Context,"clicked on $workoutExerciseClick",Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 
 
