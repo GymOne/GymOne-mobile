@@ -3,15 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_login.xml" value="0.46195652173913043" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_register.xml" value="0.46195652173913043" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_exercise_layout.xml" value="0.22" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_workout_exercise_layout.xml" value="0.22" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_workout_layout.xml" value="0.33" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_workout_sets_layout.xml" value="0.67" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_add_set.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_create_new_exercise.xml" value="0.46195652173913043" />
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_friend_request.xml" value="0.46195652173913043" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_profile.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_tracking.xml" value="0.25" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/layout_workout_exercise_item.xml" value="0.33" />
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/selected_exercise_layout.xml" value="0.46195652173913043" />
         <entry key="..\:/Users/Faust/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.1160081053698075" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1265" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/drawable/ic_baseline_catching_pokemon_24.xml" value="0.1755" />
