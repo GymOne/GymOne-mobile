@@ -14,6 +14,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gym_mobile.Entities.Exercise
+import com.example.gym_mobile.Entities.Workout.WorkoutExercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.RecyclerAdapter.TopItemSpaceDecoration
@@ -86,7 +87,7 @@ class TrackingFragment : Fragment() {
     private fun loadWorkoutExercises(date:String){
 
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
-
+        var items: List<WorkoutExercise> = ArrayList()
             workoutRepo.getWorkoutSession(User.getUser()?.id,date).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
@@ -95,12 +96,15 @@ class TrackingFragment : Fragment() {
 
                 ) {
                     val session = response.body() as WorkoutSession
-                    initRecyclerView()
-                    workoutExerciseAdapter.submitList(session.workouts)
+                    items = session.workouts
+                    workoutExerciseAdapter.submitList(items)
+
+                    recycler_view.adapter?.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<WorkoutSession>, t: Throwable) {
-                    initRecyclerView()
+                    workoutExerciseAdapter.submitList(items)
+                    recycler_view.adapter?.notifyDataSetChanged()
                 }
 
             })
@@ -133,7 +137,7 @@ class TrackingFragment : Fragment() {
             val newFragment = onCreateDialog(view,savedInstanceState)
             newFragment.show()
         }
-
+        initRecyclerView()
     }
 
     private fun onCreateDialog(view: View, savedInstanceState: Bundle?): Dialog {
