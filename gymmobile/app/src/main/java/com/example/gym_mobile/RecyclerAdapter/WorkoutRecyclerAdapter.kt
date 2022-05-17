@@ -13,11 +13,20 @@ import kotlinx.android.synthetic.main.layout_workout_exercise_item.view.*
 
 class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<WorkoutExercise> = ArrayList()
+    var items: List<WorkoutExercise> = ArrayList()
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position:Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkoutExerciseViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context,mListener
         )
     }
 
@@ -40,13 +49,17 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class WorkoutExerciseViewHolder constructor(
-        itemView: View, context: Context
+        itemView: View, context: Context, listener:onItemClickListener
     ) : RecyclerView.ViewHolder(itemView){
         val exerciseName = itemView.exercise_name
         val setsLayout = itemView.sets_layout
         val context = context
 
-
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
+        }
 
         fun bind(workoutExercise:WorkoutExercise){
             exerciseName.setText(workoutExercise.exercise.name)
@@ -58,5 +71,6 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 setsLayout.addView(view)
             }
         }
+
     }
 }
