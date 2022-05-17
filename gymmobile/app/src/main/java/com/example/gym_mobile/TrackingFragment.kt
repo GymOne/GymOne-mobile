@@ -109,7 +109,7 @@ class TrackingFragment : Fragment() {
     private fun initRecyclerView(){
 
         recycler_view.layoutManager = LinearLayoutManager(context as Context)
-            val topSpaceDecoration = TopItemSpaceDecoration(10)
+            val topSpaceDecoration = TopItemSpaceDecoration(20)
         recycler_view.addItemDecoration(topSpaceDecoration)
             workoutExerciseAdapter = WorkoutRecyclerAdapter()
         recycler_view.adapter = workoutExerciseAdapter
