@@ -42,23 +42,7 @@ class TrackingFragment : Fragment() {
     ): View? {
         binding = FragmentTrackingBinding.inflate(inflater, container, false)
 //----------Date Picker
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .build()
 
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
-
-        datePicker.addOnPositiveButtonClickListener {
-            val selectedDate = simpleDateFormat.format(datePicker.selection)
-            loadWorkoutExercises(selectedDate);
-        }
-        val selectedDate = simpleDateFormat.format(datePicker.selection)
-        loadWorkoutExercises(selectedDate);
-
-        binding.selectDate.setOnClickListener{
-            activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
-        }
 //----------Date Picker
         setFragmentResultListener("requestKey") { requestKey, bundle ->
 
@@ -133,11 +117,31 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
-        addNewSet.setOnClickListener(){
-            val newFragment = onCreateDialog(view,savedInstanceState)
-            newFragment.show()
-        }
+//        addNewSet.setOnClickListener(){
+//            val newFragment = onCreateDialog(view,savedInstanceState)
+//            newFragment.show()
+//        }
         initRecyclerView()
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        datePicker.addOnPositiveButtonClickListener {
+            val selectedDate = simpleDateFormat.format(datePicker.selection)
+            selectDate.text = selectedDate
+            loadWorkoutExercises(selectedDate);
+        }
+        val selectedDate = simpleDateFormat.format(datePicker.selection)
+        selectDate.text = selectedDate
+        loadWorkoutExercises(selectedDate);
+
+        binding.selectDate.setOnClickListener{
+            activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
+        }
     }
 
     private fun onCreateDialog(view: View, savedInstanceState: Bundle?): Dialog {
