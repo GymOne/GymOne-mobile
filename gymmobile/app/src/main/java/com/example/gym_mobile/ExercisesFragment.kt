@@ -8,12 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.ExercisesRepo
 import com.example.gym_mobile.databinding.FragmentExercisesBinding
+import com.example.gym_mobile.Model.DataStor;
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,10 +38,16 @@ class ExercisesFragment : Fragment() {
     }
 
     private lateinit var listView: ListView;
+
+    fun test(){
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnGoBackFromExercises.setOnClickListener {
             findNavController().navigate(R.id.action_exercisesFragment_to_trackingFragment)
+
+            // Use the Kotlin extension in the fragment-ktx artifact
         }
         binding.btnGoToCreateNewExercise.setOnClickListener {
             findNavController().navigate(R.id.action_exercisesFragment_to_createNewExerciseFragment)
@@ -54,7 +64,13 @@ class ExercisesFragment : Fragment() {
                 response: Response<List<Exercise>>
             ) {
                 val adapter = ExerciseAdapter(context as Context,
-                    response.body() as MutableList<Exercise>
+                    response.body() as MutableList<Exercise>,
+                    fun(cause: String, excercise: Exercise){
+                        setFragmentResult("requestKey", bundleOf(
+                            Pair("bundleKey", excercise),
+                            Pair("cause", cause),))
+                        return
+                    }
                 )
                 listView.adapter = adapter
             }
@@ -64,6 +80,7 @@ class ExercisesFragment : Fragment() {
             }
 
         })
+
 
 
         binding.searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener{
@@ -80,7 +97,11 @@ class ExercisesFragment : Fragment() {
 
     }
 
-    internal class ExerciseAdapter(context: Context, private val exercise:MutableList<Exercise>) : ArrayAdapter<Exercise>(context,0,exercise){
+     class ExerciseAdapter(
+         context: Context,
+         private val exercise: MutableList<Exercise>,
+         private val setResults: (String,Exercise) -> Unit
+     ) : ArrayAdapter<Exercise>(context,0,exercise){
 
         private val colours = intArrayOf(
             Color.parseColor("#AAAAAA"),
@@ -92,7 +113,19 @@ class ExercisesFragment : Fragment() {
             if (v1 == null) {
                 val mInflater = LayoutInflater.from(context)
                 v1 = mInflater.inflate(R.layout.adapter_exercise_layout, null)
+            }
+            val buttonAdd = v1?.findViewById<Button>(R.id.btn_add)
 
+            buttonAdd?.setOnClickListener { view ->
+                DataStor.addExcercise(exercise[position])
+                setResults("AddExcercise",exercise[position])
+                view.findNavController().navigate(R.id.action_exercisesFragment_to_trackingFragment)
+            }
+            val buttonRemove = v1?.findViewById<Button>(R.id.btn_remove)
+            buttonRemove?.setOnClickListener { view ->
+                setResults("RemoveExcercise",exercise[position])
+                DataStor.removeExcercise(exercise[position])
+                view.findNavController().navigate(R.id.action_exercisesFragment_to_trackingFragment)
             }
             val resView: View = v1!!
             resView.setBackgroundColor(colours[position % colours.size])
@@ -102,4 +135,5 @@ class ExercisesFragment : Fragment() {
             return resView
         }
     }
+
 }
