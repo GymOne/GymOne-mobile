@@ -15,7 +15,9 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Workout.WorkoutExercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Entities.Workout.WorkoutSet
@@ -31,6 +33,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.*
 
 class TrackingFragment : Fragment() {
 
@@ -57,11 +60,27 @@ class TrackingFragment : Fragment() {
             loadWorkout(selectedDate);
         }
 
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val selectedDate = simpleDateFormat.format(Date())
+        loadWorkout(selectedDate);
 
         binding.selectDate.setOnClickListener{
             activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
         }
 //----------Date Picker
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getParcelable<Exercise>("bundleKey")
+            val cause = bundle.getString("cause")
+            if (result != null) {
+                println(cause)
+                println(result.name)
+            }
+
+            // Do something with the result
+        }
+
 
         var input = ""
         var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
@@ -161,7 +180,6 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
-        weightInput
         addNewSet.setOnClickListener(){
             val newFragment = onCreateDialog(view,savedInstanceState)
             newFragment.show()
@@ -175,26 +193,26 @@ class TrackingFragment : Fragment() {
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
 
-            val DialogView = inflater.inflate(R.layout.fragment_add_set, null)
+            val DialogView = inflater.inflate(R.layout.selected_exercise_layout, null)
 
-            weights = DialogView.findViewById(R.id.weightInput)
-            reps = DialogView.findViewById(R.id.setInput)
+//            weights = DialogView.findViewById(R.id.weightInput)
+//            reps = DialogView.findViewById(R.id.setInput)
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(DialogView)
 
-            builder.setPositiveButton("Save") { dialog, which ->
-
-                    println(weights.text)
-                    println(reps.text)
-                Toast.makeText(binding.root.context, weights.text.toString() + "" +reps.text.toString() , Toast.LENGTH_SHORT).show()
-
-            }
-
-            builder.setNegativeButton("Cancel") { dialog, which ->
-                dialog.dismiss()
-                Toast.makeText(binding.root.context, "Canceled", Toast.LENGTH_SHORT).show()
-            }
+//            builder.setPositiveButton("Save") { dialog, which ->
+//
+//                    println(weights.text)
+//                    println(reps.text)
+//                Toast.makeText(binding.root.context, weights.text.toString() + "" +reps.text.toString() , Toast.LENGTH_SHORT).show()
+//
+//            }
+//
+//            builder.setNegativeButton("Cancel") { dialog, which ->
+//                dialog.dismiss()
+//                Toast.makeText(binding.root.context, "Canceled", Toast.LENGTH_SHORT).show()
+//            }
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
