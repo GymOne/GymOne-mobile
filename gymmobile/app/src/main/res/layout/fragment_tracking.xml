@@ -29,7 +29,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -38,7 +38,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="331dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_above="@+id/btnGoToExercises"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp">
 
@@ -48,8 +51,10 @@
                 android:id="@+id/btnGoToExercises"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
                 android:text="Add Exercise" />
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

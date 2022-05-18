@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_update_set.xml" value="0.25" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_exercise_layout.xml" value="0.22" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_workout_exercise_layout.xml" value="0.22" />
         <entry key="..\:/Users/Faust/AndroidStudioProjects/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_workout_layout.xml" value="0.33" />
