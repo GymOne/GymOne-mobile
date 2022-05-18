@@ -26,6 +26,13 @@ class UpdateSetActivity : AppCompatActivity() {
         btnPlusReps.setOnClickListener{
             onAddClick(txt_reps)
         }
+
+        btnMinusWeight.setOnClickListener{
+            onMinusClick(txt_weight)
+        }
+        btnMinusReps.setOnClickListener{
+            onMinusClick(txt_reps)
+        }
     }
 
     private fun onAddClick(editText:EditText){
@@ -37,5 +44,33 @@ class UpdateSetActivity : AppCompatActivity() {
             count++
             editText.setText(count.toString())
         }
+    }
+
+    private fun onMinusClick(editText:EditText){
+        val countString = editText.text.toString()
+        if(countString.length.equals(0)){
+            editText.setText("0")
+            return;
+        }
+        var count = countString.toInt()
+
+        if(count<1){
+            editText.setText("0")
+            return;
+        }
+
+        if(count>0){
+            count--
+        }
+        editText.setText(count.toString())
+
+//        else{
+//            var count = countString.toInt()
+//            if(count.equals(0)) return;
+//
+//
+//            count++
+//            editText.setText(count.toString())
+//        }
     }
 }
