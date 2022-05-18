@@ -1,10 +1,8 @@
 package com.example.gym_mobile.Entities
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
-@Parcelize
 data class Exercise(
         val _id: String,
         val name: String
-    ): Parcelable
+    ): Serializable

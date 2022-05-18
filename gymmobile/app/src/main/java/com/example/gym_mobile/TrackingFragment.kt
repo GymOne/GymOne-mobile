@@ -3,7 +3,9 @@ package com.example.gym_mobile
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 import java.text.SimpleDateFormat
 
 class TrackingFragment : Fragment() {
@@ -36,29 +39,17 @@ class TrackingFragment : Fragment() {
 
     lateinit var workoutExerciseAdapter:WorkoutRecyclerAdapter
 
+    val datePicker = MaterialDatePicker.Builder.datePicker()
+        .setTitleText("Select date")
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .build()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTrackingBinding.inflate(inflater, container, false)
-//----------Date Picker
 
-//----------Date Picker
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-
-            // We use a String here, but any type that can be put in a Bundle is supported
-            val result = bundle.getParcelable<Exercise>("bundleKey")
-            val cause = bundle.getString("cause")
-            if (result != null) {
-                println(cause)
-                println(result.name)
-            }
-
-            // Do something with the result
-        }
-
-
-        var input = ""
         var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
         if (myInputField != null) {
             myInputField.doOnTextChanged { text, start, before, count ->
@@ -68,11 +59,16 @@ class TrackingFragment : Fragment() {
         return binding.root
     }
 
-    private fun loadWorkoutExercises(date:String){
+    private fun loadWorkoutExercises(){
 
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
         var items: List<WorkoutExercise> = ArrayList()
-            workoutRepo.getWorkoutSession(User.getUser()?.id,date).enqueue(object:
+
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val selectedDate = simpleDateFormat.format(datePicker.selection)
+        selectDate.text = selectedDate
+
+            workoutRepo.getWorkoutSession(User.getUser()?.id,selectedDate).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
                     call: Call<WorkoutSession>,
@@ -103,8 +99,11 @@ class TrackingFragment : Fragment() {
         recycler_view.adapter = workoutExerciseAdapter
         (recycler_view.adapter as WorkoutRecyclerAdapter).setOnItemClickListener(object : WorkoutRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                val workoutExerciseClick = workoutExerciseAdapter.items.get(position).exercise.name;
-                Toast.makeText(context as Context,"clicked on $workoutExerciseClick",Toast.LENGTH_SHORT).show()
+                val workoutExercise = workoutExerciseAdapter.items.get(position);
+                val intent = Intent(activity,UpdateSetActivity::class.java)
+                intent.putExtra("workoutExercise",workoutExercise as Serializable)
+                startActivity(intent)
+
             }
 
         })
@@ -117,62 +116,15 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
-//        addNewSet.setOnClickListener(){
-//            val newFragment = onCreateDialog(view,savedInstanceState)
-//            newFragment.show()
-//        }
         initRecyclerView()
-
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .build()
-
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        loadWorkoutExercises();
 
         datePicker.addOnPositiveButtonClickListener {
-            val selectedDate = simpleDateFormat.format(datePicker.selection)
-            selectDate.text = selectedDate
-            loadWorkoutExercises(selectedDate);
+            loadWorkoutExercises();
         }
-        val selectedDate = simpleDateFormat.format(datePicker.selection)
-        selectDate.text = selectedDate
-        loadWorkoutExercises(selectedDate);
 
         binding.selectDate.setOnClickListener{
             activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
         }
-    }
-
-    private fun onCreateDialog(view: View, savedInstanceState: Bundle?): Dialog {
-
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater;
-
-            val DialogView = inflater.inflate(R.layout.selected_exercise_layout, null)
-
-//            weights = DialogView.findViewById(R.id.weightInput)
-//            reps = DialogView.findViewById(R.id.setInput)
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(DialogView)
-
-//            builder.setPositiveButton("Save") { dialog, which ->
-//
-//                    println(weights.text)
-//                    println(reps.text)
-//                Toast.makeText(binding.root.context, weights.text.toString() + "" +reps.text.toString() , Toast.LENGTH_SHORT).show()
-//
-//            }
-//
-//            builder.setNegativeButton("Cancel") { dialog, which ->
-//                dialog.dismiss()
-//                Toast.makeText(binding.root.context, "Canceled", Toast.LENGTH_SHORT).show()
-//            }
-
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
