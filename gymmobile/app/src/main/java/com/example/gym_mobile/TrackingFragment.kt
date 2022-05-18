@@ -71,7 +71,6 @@ class TrackingFragment : Fragment() {
     }
 
     private fun loadWorkoutExercises(){
-
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
         var items: List<WorkoutExercise> = ArrayList()
 

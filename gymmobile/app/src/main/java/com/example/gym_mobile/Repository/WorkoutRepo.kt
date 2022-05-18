@@ -6,10 +6,7 @@ import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface WorkoutRepo {
 
@@ -18,4 +15,7 @@ interface WorkoutRepo {
 
     @POST("/workout/session")
     suspend fun createWorkoutSession(@Body createWorkoutSessionDto: CreateWorkoutSessionDto?) : Response<Any>
+
+    @DELETE("/workout/exercise/set/deleteById/{id}")
+    suspend fun deleteWorkoutSet(@Path("id") id: String) : Response<Any>
 }

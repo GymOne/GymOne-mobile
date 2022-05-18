@@ -83,10 +83,11 @@
 
                 <Button
                     android:id="@+id/btnMinusWeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-" />
+                    android:text="-"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/txt_weight"
@@ -99,10 +100,11 @@
 
                 <Button
                     android:id="@+id/btnPlusWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="+" />
+                    android:text="+"
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -126,10 +128,11 @@
 
                 <Button
                     android:id="@+id/btnMinusReps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="-" />
+                    android:text="-"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/txt_reps"
@@ -142,10 +145,11 @@
 
                 <Button
                     android:id="@+id/btnPlusReps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="+" />
+                    android:text="+"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -166,7 +170,7 @@
                 android:text="Add Set" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -175,8 +179,13 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/lv_sets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="10dp"/>
+        android:choiceMode="singleChoice"
+        android:listSelector="#EFEFEF"
+        android:divider="#EFEFEF"
+        android:dividerHeight="1dp"
+        android:layout_marginVertical="10dp" />
 
 </LinearLayout>
