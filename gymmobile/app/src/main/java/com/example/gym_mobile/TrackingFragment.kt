@@ -24,7 +24,6 @@ import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_add_set.*
 import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
@@ -148,7 +147,7 @@ class TrackingFragment : Fragment() {
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
 
-            val DialogView = inflater.inflate(R.layout.selected_exercise_layout, null)
+            val DialogView = inflater.inflate(R.layout.create_new_exercise_layout, null)
 
 //            weights = DialogView.findViewById(R.id.weightInput)
 //            reps = DialogView.findViewById(R.id.setInput)

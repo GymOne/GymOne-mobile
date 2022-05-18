@@ -23,7 +23,6 @@ import com.example.gym_mobile.databinding.FragmentExercisesBinding
 import com.example.gym_mobile.Model.DataStor;
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.create_new_exercise_layout.*
-import kotlinx.android.synthetic.main.fragment_add_set.*
 import kotlinx.android.synthetic.main.fragment_exercises.*
 import retrofit2.Call
 import retrofit2.Callback
