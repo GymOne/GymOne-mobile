@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateSetActivity"
             android:exported="false" />
         <activity
