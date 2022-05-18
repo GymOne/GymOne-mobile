@@ -56,17 +56,17 @@ class TrackingFragment : Fragment() {
         setFragmentResultListener("requestKey") { requestKey, bundle ->
 
             // We use a String here, but any type that can be put in a Bundle is supported
-            val result = bundle.getParcelable<Exercise>("bundleKey")
-            val cause = bundle.getString("cause")
-            if (result != null) {
-                println(cause)
-                println(result.name)
-            }
+            //val result = bundle.getParcelable<Exercise>("bundleKey")
+//            val cause = bundle.getString("cause")
+//            if (result != null) {
+//                println(cause)
+//                println(result.name)
+//            }
 
             // Do something with the result
         }
 
-        var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
+        var myInputField = view?.findViewById<TextInputEditText>(R.id.exerciseNameInput)
         if (myInputField != null) {
             myInputField.doOnTextChanged { text, start, before, count ->
             }
