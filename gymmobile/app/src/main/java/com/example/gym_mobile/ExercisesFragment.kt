@@ -12,12 +12,15 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.auth0.android.jwt.Claim
+import com.auth0.android.jwt.JWT
 import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.ExercisesRepo
 import com.example.gym_mobile.databinding.FragmentExercisesBinding
 import com.example.gym_mobile.Model.DataStor;
+import com.example.gym_mobile.Repository.WorkoutRepo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -118,6 +121,12 @@ class ExercisesFragment : Fragment() {
 
             buttonAdd?.setOnClickListener { view ->
                 DataStor.addExcercise(exercise[position])
+                val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
+                // PArsing token
+//                var jwt: JWT = JWT(User.getToken())
+//                var claim = jwt.getClaim("").asString()
+                println(User.getToken())
+                //workoutRepo.createWorkoutSession()
                 setResults("AddExcercise",exercise[position])
                 view.findNavController().navigate(R.id.action_exercisesFragment_to_trackingFragment)
             }
