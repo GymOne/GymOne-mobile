@@ -26,6 +26,7 @@ import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,8 +50,23 @@ class TrackingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTrackingBinding.inflate(inflater, container, false)
+//----------Date Picker
 
-        var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
+//----------Date Picker
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+
+            // We use a String here, but any type that can be put in a Bundle is supported
+            //val result = bundle.getParcelable<Exercise>("bundleKey")
+//            val cause = bundle.getString("cause")
+//            if (result != null) {
+//                println(cause)
+//                println(result.name)
+//            }
+
+            // Do something with the result
+        }
+
+        var myInputField = view?.findViewById<TextInputEditText>(R.id.exerciseNameInput)
         if (myInputField != null) {
             myInputField.doOnTextChanged { text, start, before, count ->
             }
@@ -116,6 +132,11 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
+//        exerciseNameInput
+//        btnGoToCreateNewExercise.setOnClickListener(){
+//            val newFragment = onCreateDialog(view,savedInstanceState)
+//            newFragment.show()
+//        }
         initRecyclerView()
         loadWorkoutExercises();
 
@@ -126,5 +147,37 @@ class TrackingFragment : Fragment() {
         binding.selectDate.setOnClickListener{
             activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
         }
+    }
+
+    private fun onCreateDialog(view: View, savedInstanceState: Bundle?): Dialog {
+
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            // Get the layout inflater
+            val inflater = requireActivity().layoutInflater;
+
+            val DialogView = inflater.inflate(R.layout.create_new_exercise_layout, null)
+
+//            weights = DialogView.findViewById(R.id.weightInput)
+//            reps = DialogView.findViewById(R.id.setInput)
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(DialogView)
+
+//            builder.setPositiveButton("Save") { dialog, which ->
+//
+//                    println(weights.text)
+//                    println(reps.text)
+//                Toast.makeText(binding.root.context, weights.text.toString() + "" +reps.text.toString() , Toast.LENGTH_SHORT).show()
+//
+//            }
+//
+//            builder.setNegativeButton("Cancel") { dialog, which ->
+//                dialog.dismiss()
+//                Toast.makeText(binding.root.context, "Canceled", Toast.LENGTH_SHORT).show()
+//            }
+
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
