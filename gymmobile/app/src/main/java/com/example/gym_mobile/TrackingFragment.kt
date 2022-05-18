@@ -24,6 +24,8 @@ import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.fragment_add_set.*
+import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,12 +60,6 @@ class TrackingFragment : Fragment() {
         }
 
 
-        var input = ""
-        var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
-        if (myInputField != null) {
-            myInputField.doOnTextChanged { text, start, before, count ->
-            }
-        }
 
         return binding.root
     }
@@ -117,7 +113,8 @@ class TrackingFragment : Fragment() {
         binding.btnGoToExercises.setOnClickListener {
             findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
         }
-//        addNewSet.setOnClickListener(){
+//        exerciseNameInput
+//        btnGoToCreateNewExercise.setOnClickListener(){
 //            val newFragment = onCreateDialog(view,savedInstanceState)
 //            newFragment.show()
 //        }
