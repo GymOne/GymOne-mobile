@@ -3,7 +3,9 @@ package com.example.gym_mobile
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 import java.text.SimpleDateFormat
 
 class TrackingFragment : Fragment() {
@@ -36,6 +39,11 @@ class TrackingFragment : Fragment() {
     private lateinit var binding: FragmentTrackingBinding
 
     lateinit var workoutExerciseAdapter:WorkoutRecyclerAdapter
+
+    val datePicker = MaterialDatePicker.Builder.datePicker()
+        .setTitleText("Select date")
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .build()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,16 +66,25 @@ class TrackingFragment : Fragment() {
             // Do something with the result
         }
 
-
+        var myInputField = view?.findViewById<TextInputEditText>(R.id.weightInput)
+        if (myInputField != null) {
+            myInputField.doOnTextChanged { text, start, before, count ->
+            }
+        }
 
         return binding.root
     }
 
-    private fun loadWorkoutExercises(date:String){
+    private fun loadWorkoutExercises(){
 
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
         var items: List<WorkoutExercise> = ArrayList()
-            workoutRepo.getWorkoutSession(User.getUser()?.id,date).enqueue(object:
+
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val selectedDate = simpleDateFormat.format(datePicker.selection)
+        selectDate.text = selectedDate
+
+            workoutRepo.getWorkoutSession(User.getUser()?.id,selectedDate).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
                     call: Call<WorkoutSession>,
@@ -98,8 +115,11 @@ class TrackingFragment : Fragment() {
         recycler_view.adapter = workoutExerciseAdapter
         (recycler_view.adapter as WorkoutRecyclerAdapter).setOnItemClickListener(object : WorkoutRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                val workoutExerciseClick = workoutExerciseAdapter.items.get(position).exercise.name;
-                Toast.makeText(context as Context,"clicked on $workoutExerciseClick",Toast.LENGTH_SHORT).show()
+                val workoutExercise = workoutExerciseAdapter.items.get(position);
+                val intent = Intent(activity,UpdateSetActivity::class.java)
+                intent.putExtra("workoutExercise",workoutExercise as Serializable)
+                startActivity(intent)
+
             }
 
         })
@@ -118,22 +138,11 @@ class TrackingFragment : Fragment() {
 //            newFragment.show()
 //        }
         initRecyclerView()
-
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .build()
-
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        loadWorkoutExercises();
 
         datePicker.addOnPositiveButtonClickListener {
-            val selectedDate = simpleDateFormat.format(datePicker.selection)
-            selectDate.text = selectedDate
-            loadWorkoutExercises(selectedDate);
+            loadWorkoutExercises();
         }
-        val selectedDate = simpleDateFormat.format(datePicker.selection)
-        selectDate.text = selectedDate
-        loadWorkoutExercises(selectedDate);
 
         binding.selectDate.setOnClickListener{
             activity?.let { it1 -> datePicker.show(it1.supportFragmentManager, "Material Date Picker") }
