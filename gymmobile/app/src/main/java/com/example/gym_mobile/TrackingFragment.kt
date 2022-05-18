@@ -5,17 +5,13 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Workout.WorkoutExercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Model.User
@@ -26,7 +22,6 @@ import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_tracking.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -80,11 +75,10 @@ class TrackingFragment : Fragment() {
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
         var items: List<WorkoutExercise> = ArrayList()
 
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val selectedDate = simpleDateFormat.format(datePicker.selection)
-        selectDate.text = selectedDate
+        val selDate = getSelectedDate()
+        selectDate.text = selDate
 
-            workoutRepo.getWorkoutSession(User.getUser()?.id,selectedDate).enqueue(object:
+            workoutRepo.getWorkoutSession(User.getUser()?.id,selDate).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
                     call: Call<WorkoutSession>,
@@ -125,12 +119,30 @@ class TrackingFragment : Fragment() {
         })
 
     }
+    public fun getSelectedDate():String{
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val selectedDate = simpleDateFormat.format(datePicker.selection)
+        return selectedDate
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnGoToExercises.setOnClickListener {
-            findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
+//            val intent = Intent (getActivity(), ExercisesFragment::class.java)
+//            intent.putExtra("date",getSelectedDate());
+//            activity?.startActivity(intent)
+//
+//            val exercisesFragment
+//            activity?.getSupportFragmentManager()?.beginTransaction()
+//                ?.replace(R.id.profileFragment, exercisesFragment, "fragmnetId")
+//                ?.commit();
+
+//            findNavController().navigate(R.id.action_trackingFragment_to_exercisesFragment)
+
+            val intent = Intent(activity,ExerciseActivity::class.java)
+            intent.putExtra("date",getSelectedDate())
+            startActivity(intent)
         }
 //        exerciseNameInput
 //        btnGoToCreateNewExercise.setOnClickListener(){
