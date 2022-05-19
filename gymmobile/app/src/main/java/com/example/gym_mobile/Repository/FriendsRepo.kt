@@ -17,4 +17,6 @@ interface FriendsRepo {
 
     @POST("/friend/submitRequest")
     suspend fun submitFriendRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+
+
 }

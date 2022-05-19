@@ -111,7 +111,10 @@ class UpdateSetActivity : AppCompatActivity() {
                 call: Call<WorkoutExercise>,
                 response: Response<WorkoutExercise>
             ) {
-                workoutExercise = response.body() as WorkoutExercise
+
+                if (workoutExercise != null && response.body() != null){
+                    workoutExercise = response.body() as WorkoutExercise
+                }
                 resetAdapter()
             }
 

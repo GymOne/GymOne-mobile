@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.Dto.GetFriendsDto
 import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Friend
+import com.example.gym_mobile.Model.DataStor
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.FriendsRepo
@@ -78,7 +80,12 @@ class FriendsFragment : Fragment() {
                 v1 = mInflater.inflate(R.layout.adapter_friends_layout, null)
 
             }
-            val resView: View = v1!!
+            val buttonAdd = v1?.findViewById<Button>(R.id.btn_unfriend)
+
+            buttonAdd?.setOnClickListener { view ->
+
+            }
+                val resView: View = v1!!
             resView.setBackgroundColor(colours[position % colours.size])
             val e = friend[position]
             val nameView = resView.findViewById<TextView>(R.id.tv_friends)
