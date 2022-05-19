@@ -8,12 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.Dto.GetFriendsDto
+import com.example.gym_mobile.Dto.SubmitFriendRequestDto
 import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Friend
+import com.example.gym_mobile.Model.DataStor
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.FriendsRepo
@@ -25,7 +28,7 @@ import retrofit2.Response
 class FriendsFragment : Fragment() {
     private lateinit var listFriends: ListView;
     private lateinit var binding: FragmentFriendsBinding
-    var _friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
+    private var _friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
     val email = "sender@g.com"
 
     override fun onCreateView(
@@ -77,6 +80,18 @@ class FriendsFragment : Fragment() {
                 val mInflater = LayoutInflater.from(context)
                 v1 = mInflater.inflate(R.layout.adapter_friends_layout, null)
 
+            }
+            val buttonAdd = v1?.findViewById<Button>(R.id.btn_unfriend)
+
+            println("Buttonn:    "+buttonAdd);
+
+            buttonAdd?.setOnClickListener { view ->
+                // Needs some more massaging
+                val friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
+                println("Email of the friend:    " + friend[position].friendEmail)
+                val obj: SubmitFriendRequestDto? =
+                    User.getUserEmail()?.let { SubmitFriendRequestDto(it, friend[position].friendEmail, false ) }
+                friendRepo.removeRequest(obj)
             }
             val resView: View = v1!!
             resView.setBackgroundColor(colours[position % colours.size])

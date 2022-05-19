@@ -16,5 +16,8 @@ interface FriendsRepo {
     fun getFriendsByEmail(@Path("email") email: String?) : Call<List<GetFriendsDto>>
 
     @POST("/friend/submitRequest")
-    suspend fun submitFriendRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+    fun submitFriendRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+
+    @POST("friend/removeRequest")
+    fun removeRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
 }
