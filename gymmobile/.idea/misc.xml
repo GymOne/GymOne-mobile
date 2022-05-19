@@ -20,6 +20,7 @@
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/drawable/ic_baseline_tracking_24.xml" value="0.1" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/drawable/search_bg.xml" value="0.173" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_exercise.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_login.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/activity_update_set.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/adapter_exercise_layout.xml" value="0.2" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/fragment_tracking.xml" value="0.264" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/layout_workout_exercise_item.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/selected_exercise_layout.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/layout/send_friend_request_layout.xml" value="0.13405797101449277" />
         <entry key="..\:/Users/manta/Desktop/GymExam/GymOne-mobile/gymmobile/app/src/main/res/menu/nav_menu.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2682291666666667" />
