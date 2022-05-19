@@ -63,9 +63,8 @@ class TrackingFragment : Fragment() {
     private fun loadWorkoutExercises(){
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
         val selDate = getSelectedDate()
-        val user = User.getUser() ?: return
 
-        workoutRepo.getWorkoutSession(user.id,selDate).enqueue(object:
+        workoutRepo.getWorkoutSession(User.getUserId(),selDate).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
                     call: Call<WorkoutSession>,

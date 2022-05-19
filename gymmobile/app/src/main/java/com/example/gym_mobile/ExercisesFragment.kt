@@ -86,7 +86,7 @@ class ExercisesFragment : Fragment() {
 
         val exercisesRepo = ApiConnector.getInstance().create(ExercisesRepo::class.java)
 
-        exercisesRepo.getExercisesByUserId(User.getUser()?.id).enqueue(object:
+        exercisesRepo.getExercisesByUserId(User.getUserId()).enqueue(object:
             Callback<List<Exercise>>{
             override fun onResponse(
                 call: Call<List<Exercise>>,
