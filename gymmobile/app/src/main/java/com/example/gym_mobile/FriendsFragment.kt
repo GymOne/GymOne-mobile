@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.example.gym_mobile.Dto.GetFriendsDto
 import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Friend
 import com.example.gym_mobile.Model.User
@@ -43,27 +44,27 @@ class FriendsFragment : Fragment() {
         }
         listFriends = view.findViewById(R.id.listasViewas);
 
-        _friendRepo.getFriendsByEmail(email).enqueue(object:
-            Callback<List<Friend>> {
+        _friendRepo.getFriendsByEmail(User.getUserEmail()).enqueue(object:
+            Callback<List<GetFriendsDto>> {
             override fun onResponse(
-                call: Call<List<Friend>>,
-                response: Response<List<Friend>>
+                call: Call<List<GetFriendsDto>>,
+                response: Response<List<GetFriendsDto>>
             ) {
                 val adapter = FriendsFragment.FriendAdapter(
                     context as Context,
-                    response.body() as MutableList<Friend>
+                    response.body() as MutableList<GetFriendsDto>
                 )
                 listFriends.adapter = adapter
             }
 
-            override fun onFailure(call: Call<List<Friend>>, t: Throwable) {
+            override fun onFailure(call: Call<List<GetFriendsDto>>, t: Throwable) {
                 listFriends.adapter = null
             }
 
         })
     }
 
-    internal class FriendAdapter(context: Context, private val friend:MutableList<Friend>) : ArrayAdapter<Friend>(context,0,friend){
+    internal class FriendAdapter(context: Context, private val friend:MutableList<GetFriendsDto>) : ArrayAdapter<GetFriendsDto>(context,0,friend){
 
         private val colours = intArrayOf(
             Color.parseColor("#AAAAAA"),
@@ -74,14 +75,14 @@ class FriendsFragment : Fragment() {
             var v1: View? = v
             if (v1 == null) {
                 val mInflater = LayoutInflater.from(context)
-                v1 = mInflater.inflate(R.layout.adapter_exercise_layout, null)
+                v1 = mInflater.inflate(R.layout.adapter_friends_layout, null)
 
             }
             val resView: View = v1!!
             resView.setBackgroundColor(colours[position % colours.size])
             val e = friend[position]
-            val nameView = resView.findViewById<TextView>(R.id.tv_exercise)
-            nameView.text = e.receiverId
+            val nameView = resView.findViewById<TextView>(R.id.tv_friends)
+            nameView.text = e.name
             return resView
         }
     }
