@@ -1,6 +1,9 @@
 package com.example.gym_mobile.Model
 
+import com.example.gym_mobile.Dto.SubmitFriendRequestDto
 import com.example.gym_mobile.Entities.Exercise
+import com.example.gym_mobile.Repository.ApiConnector
+import com.example.gym_mobile.Repository.FriendsRepo
 
 object DataStor{
 
