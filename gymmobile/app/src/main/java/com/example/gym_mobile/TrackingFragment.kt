@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_tracking.*
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,20 +47,9 @@ class TrackingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTrackingBinding.inflate(inflater, container, false)
-//----------Date Picker
 
-//----------Date Picker
+
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-
-            // We use a String here, but any type that can be put in a Bundle is supported
-            //val result = bundle.getParcelable<Exercise>("bundleKey")
-//            val cause = bundle.getString("cause")
-//            if (result != null) {
-//                println(cause)
-//                println(result.name)
-//            }
-
-            // Do something with the result
         }
 
         var myInputField = view?.findViewById<TextInputEditText>(R.id.exerciseNameInput)
@@ -66,18 +57,15 @@ class TrackingFragment : Fragment() {
             myInputField.doOnTextChanged { text, start, before, count ->
             }
         }
-
         return binding.root
     }
 
     private fun loadWorkoutExercises(){
                 val workoutRepo = ApiConnector.getInstance().create(WorkoutRepo::class.java)
-        var items: List<WorkoutExercise> = ArrayList()
-
         val selDate = getSelectedDate()
-        selectDate.text = selDate
+        val user = User.getUser() ?: return
 
-            workoutRepo.getWorkoutSession(User.getUser()?.id,selDate).enqueue(object:
+        workoutRepo.getWorkoutSession(user.id,selDate).enqueue(object:
                 Callback<WorkoutSession> {
                 override fun onResponse(
                     call: Call<WorkoutSession>,
@@ -85,27 +73,33 @@ class TrackingFragment : Fragment() {
 
                 ) {
                     val session = response.body() as WorkoutSession
-                    items = session.workouts
-                    workoutExerciseAdapter.submitList(items)
 
-                    recycler_view.adapter?.notifyDataSetChanged()
+                    workoutExerciseAdapter.submitList(session.workouts)
+                    workoutExerciseAdapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<WorkoutSession>, t: Throwable) {
-                    workoutExerciseAdapter.submitList(items)
-                    recycler_view.adapter?.notifyDataSetChanged()
+                    workoutExerciseAdapter.submitList(emptyList())
+                    workoutExerciseAdapter.notifyDataSetChanged()
                 }
-
             })
+
+    }
+
+    override fun onStart() {
+        loadWorkoutExercises()
+        super.onStart()
     }
 
     private fun initRecyclerView(){
-
+        recycler_view.recycledViewPool.clear()
         recycler_view.layoutManager = LinearLayoutManager(context as Context)
+        if(recycler_view.itemDecorationCount == 0) {
             val topSpaceDecoration = TopItemSpaceDecoration(20)
-        recycler_view.addItemDecoration(topSpaceDecoration)
+            recycler_view.addItemDecoration(topSpaceDecoration)
+        }
             workoutExerciseAdapter = WorkoutRecyclerAdapter()
-        recycler_view.adapter = workoutExerciseAdapter
+        recycler_view.swapAdapter(workoutExerciseAdapter,true)
         (recycler_view.adapter as WorkoutRecyclerAdapter).setOnItemClickListener(object : WorkoutRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                 val workoutExercise = workoutExerciseAdapter.items.get(position);
@@ -128,6 +122,7 @@ class TrackingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnGoToExercises.setOnClickListener {
+
 //            val intent = Intent (getActivity(), ExercisesFragment::class.java)
 //            intent.putExtra("date",getSelectedDate());
 //            activity?.startActivity(intent)
@@ -149,10 +144,11 @@ class TrackingFragment : Fragment() {
 //            newFragment.show()
 //        }
         initRecyclerView()
-        loadWorkoutExercises();
+        selectDate.text = getSelectedDate()
 
         datePicker.addOnPositiveButtonClickListener {
-            loadWorkoutExercises();
+            selectDate.text = getSelectedDate()
+            loadWorkoutExercises()
         }
 
         binding.selectDate.setOnClickListener{

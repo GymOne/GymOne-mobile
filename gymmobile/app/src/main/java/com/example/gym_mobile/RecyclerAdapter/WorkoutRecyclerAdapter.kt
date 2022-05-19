@@ -24,6 +24,7 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         mListener = listener
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkoutExerciseViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context,mListener
@@ -31,15 +32,17 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setIsRecyclable(false);
         when(holder){
+
             is WorkoutExerciseViewHolder -> {
+
                 holder.bind(items.get(position))
             }
         }
     }
 
     override fun getItemCount(): Int {
-        Log.d("SIZE",items.size.toString())
         return items.size
     }
 
