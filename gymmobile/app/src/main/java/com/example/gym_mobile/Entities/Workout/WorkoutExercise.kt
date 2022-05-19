@@ -6,5 +6,5 @@ import java.io.Serializable
 data class WorkoutExercise (
     val _id: String,
     val exercise: Exercise,
-    val sets: List<WorkoutSet>,
+    var sets: List<WorkoutSet>,
 ) :Serializable
