@@ -24,7 +24,10 @@ import com.example.gym_mobile.databinding.FragmentTrackingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_tracking.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -99,6 +102,21 @@ class TrackingFragment : Fragment() {
         }
             workoutExerciseAdapter = WorkoutRecyclerAdapter()
         recycler_view.swapAdapter(workoutExerciseAdapter,true)
+
+        (recycler_view.adapter as WorkoutRecyclerAdapter).setOnButtonClickListener(object : WorkoutRecyclerAdapter.onButtonClickListener{
+            override fun onButtonClick(position: Int) {
+                val workoutExercise = workoutExerciseAdapter.items.get(position)
+
+                val service = ApiConnector.getInstance().create(WorkoutRepo::class.java)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    val response = service.deleteWorkoutExercise(workoutExercise._id)
+                    if(response.isSuccessful){
+                        loadWorkoutExercises()
+                    }
+                }
+            }
+        })
         (recycler_view.adapter as WorkoutRecyclerAdapter).setOnItemClickListener(object : WorkoutRecyclerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                 val workoutExercise = workoutExerciseAdapter.items.get(position);

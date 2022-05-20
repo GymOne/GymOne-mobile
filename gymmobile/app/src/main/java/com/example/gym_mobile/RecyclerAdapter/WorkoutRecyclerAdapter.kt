@@ -15,19 +15,28 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: List<WorkoutExercise> = ArrayList()
     private lateinit var mListener : onItemClickListener
+    private lateinit var bListener : onButtonClickListener
 
     interface onItemClickListener{
         fun onItemClick(position:Int)
+    }
+
+    interface onButtonClickListener{
+        fun onButtonClick(position:Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
         mListener = listener
     }
 
+    fun setOnButtonClickListener(listener: onButtonClickListener){
+        bListener = listener
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkoutExerciseViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context,mListener
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_workout_exercise_item,parent,false),parent.context,mListener, bListener
         )
     }
 
@@ -52,15 +61,19 @@ class WorkoutRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class WorkoutExerciseViewHolder constructor(
-        itemView: View, context: Context, listener:onItemClickListener
+        itemView: View, context: Context, listener:onItemClickListener, buttonListener:onButtonClickListener
     ) : RecyclerView.ViewHolder(itemView){
         val exerciseName = itemView.exercise_name
         val setsLayout = itemView.sets_layout
+        val btn = itemView.btn_delete_exercise
         val context = context
 
         init {
             itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
+            }
+            btn.setOnClickListener{
+                buttonListener.onButtonClick(adapterPosition)
             }
         }
 
