@@ -1,9 +1,8 @@
 package com.example.gym_mobile.Repository
 
-import com.example.gym_mobile.Dto.CreateWorkoutExerciseSet
+import com.example.gym_mobile.Dto.CreateWorkoutExerciseDto
+import com.example.gym_mobile.Dto.CreateWorkoutExerciseSetDto
 import com.example.gym_mobile.Dto.CreateWorkoutSessionDto
-import com.example.gym_mobile.Dto.RegisterDto
-import com.example.gym_mobile.Entities.Exercise
 import com.example.gym_mobile.Entities.Workout.WorkoutExercise
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import retrofit2.Call
@@ -22,7 +21,10 @@ interface WorkoutRepo {
     suspend fun deleteWorkoutExerciseSet(@Path("id") id: String) : Response<Any>
 
     @POST("/workout/exercise/set")
-    suspend fun createWorkoutExerciseSet(@Body createWorkoutExerciseSet: CreateWorkoutExerciseSet) : Response<Any>
+    suspend fun createWorkoutExerciseSet(@Body createWorkoutExerciseSetDto: CreateWorkoutExerciseSetDto) : Response<Any>
+
+    @POST("/workout/exercise")
+    suspend fun createWorkoutExercise(@Body createWorkoutExerciseDto: CreateWorkoutExerciseDto) : Response<Any>
 
     @GET("/workout/exercise/getById/{id}")
     fun getWorkoutExercise(@Path("id") id: String) : Call<WorkoutExercise>

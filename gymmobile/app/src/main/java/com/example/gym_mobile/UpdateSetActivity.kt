@@ -3,20 +3,16 @@ package com.example.gym_mobile
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.example.gym_mobile.Dto.CreateWorkoutExerciseSet
+import com.example.gym_mobile.Dto.CreateWorkoutExerciseSetDto
 import com.example.gym_mobile.Entities.Workout.WorkoutExercise
-import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Entities.Workout.WorkoutSet
-import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.WorkoutRepo
 import kotlinx.android.synthetic.main.activity_update_set.*
-import kotlinx.android.synthetic.main.adapter_exercise_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,7 +33,7 @@ class UpdateSetActivity : AppCompatActivity() {
 
         resetAdapter()
 
-        backToWorkout.setOnClickListener{
+        btnGoBackFromExercises.setOnClickListener{
             this.finish()
         }
 
@@ -60,7 +56,6 @@ class UpdateSetActivity : AppCompatActivity() {
             val position = lv_sets.checkedItemPosition
             val item = lv_sets.getItemAtPosition(position) as WorkoutSet
             val service = ApiConnector.getInstance().create(WorkoutRepo::class.java)
-                val context = this
 
             CoroutineScope(Dispatchers.IO).launch {
                 val response = service.deleteWorkoutExerciseSet(item._id)
@@ -80,7 +75,7 @@ class UpdateSetActivity : AppCompatActivity() {
             val repsString = txt_reps.text.toString()
             if(weightString.isNotEmpty() && repsString.isNotEmpty()){
                 val service = ApiConnector.getInstance().create(WorkoutRepo::class.java)
-                val workoutSetToCreate = CreateWorkoutExerciseSet(workoutExerciseId = workoutExercise._id,weight = weightString,reps = repsString)
+                val workoutSetToCreate = CreateWorkoutExerciseSetDto(workoutExerciseId = workoutExercise._id,weight = weightString,reps = repsString)
                 CoroutineScope(Dispatchers.IO).launch {
                     val response = service.createWorkoutExerciseSet(workoutSetToCreate)
                     if(response.isSuccessful){
