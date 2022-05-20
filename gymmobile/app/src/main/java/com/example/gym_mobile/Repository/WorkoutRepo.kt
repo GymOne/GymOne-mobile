@@ -20,6 +20,9 @@ interface WorkoutRepo {
     @DELETE("/workout/exercise/set/deleteById/{id}")
     suspend fun deleteWorkoutExerciseSet(@Path("id") id: String) : Response<Any>
 
+    @DELETE("/workout/exercise/deleteById/{id}")
+    suspend fun deleteWorkoutExercise(@Path("id") id: String) : Response<Any>
+
     @POST("/workout/exercise/set")
     suspend fun createWorkoutExerciseSet(@Body createWorkoutExerciseSetDto: CreateWorkoutExerciseSetDto) : Response<Any>
 
