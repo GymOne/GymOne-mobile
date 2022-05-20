@@ -15,11 +15,14 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add" />
+        android:text="Add To Workout"
+        android:textSize="9dp" />
 
     <Button
         android:id="@+id/btn_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Remove" />
+        android:text="Remove"
+        android:layout_marginLeft="5dp"
+        android:textSize="9dp" />
 </LinearLayout>

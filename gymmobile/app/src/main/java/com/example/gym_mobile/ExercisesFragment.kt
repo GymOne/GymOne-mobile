@@ -85,24 +85,25 @@ class ExercisesFragment : Fragment() {
 
 
         val exercisesRepo = ApiConnector.getInstance().create(ExercisesRepo::class.java)
-
+        Log.d("response","SOMETHING")
         exercisesRepo.getExercisesByUserId(User.getUserId()).enqueue(object:
             Callback<List<Exercise>>{
             override fun onResponse(
                 call: Call<List<Exercise>>,
                 response: Response<List<Exercise>>
             ) {
-                val adapter = ExerciseAdapter(context as Context,
-                    response.body() as MutableList<Exercise>,
-                    fun(cause: String, excercise: Exercise){
-                        setFragmentResult("requestKey", bundleOf(
-                            Pair("bundleKey", excercise),
-                            Pair("cause", cause),
-                        ))
-                        return
-                    }
-                )
-                listView.adapter = adapter
+                Log.d("response",response.body().toString())
+//                val adapter = ExerciseAdapter(context as Context,
+//                    response.body() as MutableList<Exercise>,
+//                    fun(cause: String, excercise: Exercise){
+//                        setFragmentResult("requestKey", bundleOf(
+//                            Pair("bundleKey", excercise),
+//                            Pair("cause", cause),
+//                        ))
+//                        return
+//                    }
+//                )
+//                listView.adapter = adapter
             }
 
             override fun onFailure(call: Call<List<Exercise>>, t: Throwable) {
