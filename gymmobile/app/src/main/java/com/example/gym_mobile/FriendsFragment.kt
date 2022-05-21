@@ -92,10 +92,13 @@ class FriendsFragment : Fragment() {
             buttonAdd?.setOnClickListener { view ->
                 // Needs some more massaging
                 val friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
-                println("Email of the friend:    " + friend[position].friendEmail)
-                val obj: SubmitFriendRequestDto? =
-                    User.getUserEmail()?.let { SubmitFriendRequestDto(it, friend[position].friendEmail, false ) }
-                friendRepo.removeRequest(obj)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val obj: SubmitFriendRequestDto? = User.getUserEmail()?.let { SubmitFriendRequestDto(it, friend[position].friendEmail, false ) }
+                    val response = friendRepo.removeRequest(obj)
+                    if (response.isSuccessful){
+                        println("Successfully deleted")
+                    }
+                }
             }
             val resView: View = v1!!
             resView.setBackgroundColor(colours[position % colours.size])
