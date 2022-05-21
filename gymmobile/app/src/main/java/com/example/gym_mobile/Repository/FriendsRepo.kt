@@ -15,9 +15,11 @@ interface FriendsRepo {
     @GET("friend/getFriendsByEmail/{email}")
     fun getFriendsByEmail(@Path("email") email: String?) : Call<List<GetFriendsDto>>
 
+    //@GET("")
+
     @POST("/friend/submitRequest")
-    fun submitFriendRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+    suspend fun submitFriendRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
 
     @POST("friend/removeRequest")
-    fun removeRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+    suspend fun removeRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
 }

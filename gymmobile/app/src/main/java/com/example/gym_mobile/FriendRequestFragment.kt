@@ -12,10 +12,13 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.Dto.LoginDto
 import com.example.gym_mobile.Dto.SubmitFriendRequestDto
+import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Model.User
+import com.example.gym_mobile.RecyclerAdapter.FriendRequestRecyclerAdapter
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.AuthRepo
 import com.example.gym_mobile.Repository.FriendsRepo
+import com.example.gym_mobile.Repository.WorkoutRepo
 import com.example.gym_mobile.databinding.FragmentFriendRequestBinding
 import com.example.gym_mobile.databinding.FragmentFriendsBinding
 import com.example.gym_mobile.databinding.FragmentTrackingBinding
@@ -27,10 +30,14 @@ import kotlinx.android.synthetic.main.fragment_friend_request.*
 import kotlinx.android.synthetic.main.send_friend_request_layout.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendRequestFragment : Fragment() {
 
     private lateinit var binding: FragmentFriendRequestBinding
+    lateinit var friendRequestAdapter : FriendRequestRecyclerAdapter
 
     lateinit var email: TextInputEditText
 
@@ -47,6 +54,30 @@ class FriendRequestFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun loadFriendRequests(){
+        val friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
+
+        friendRepo.getFriendsByEmail(User.getUserEmail()).enqueue(object:
+            Callback<WorkoutSession> {
+            override fun onResponse(
+                call: Call<WorkoutSession>,
+                response: Response<WorkoutSession>
+
+            ) {
+                val session = response.body() as WorkoutSession
+
+                workoutExerciseAdapter.submitList(session.workouts)
+                workoutExerciseAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<WorkoutSession>, t: Throwable) {
+                workoutExerciseAdapter.submitList(emptyList())
+                workoutExerciseAdapter.notifyDataSetChanged()
+            }
+        })
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

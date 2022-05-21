@@ -1,5 +1,6 @@
 package com.example.gym_mobile
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -21,6 +22,9 @@ import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.FriendsRepo
 import com.example.gym_mobile.databinding.FragmentFriendsBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
