@@ -14,6 +14,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/purple_500</item>
+        <item name="android:textColor">@color/blue_100</item>
+    </style>
+
 <!--    <style name="toolbartext" parent="TextAppearance.MaterialComponents.Button">-->
 <!--        <item name="android:textSize">16dp</item>-->
 <!--    </style>-->

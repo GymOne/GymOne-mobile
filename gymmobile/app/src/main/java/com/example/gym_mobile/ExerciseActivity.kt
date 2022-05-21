@@ -46,6 +46,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.logging.Logger
+import androidx.appcompat.widget.Toolbar
 
 class ExerciseActivity : AppCompatActivity() {
 
@@ -58,6 +59,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         selectedDate = intent.getStringExtra("date").toString()
 
+        setSupportActionBar(toolbarExercise)
 
         var input = ""
         var myInputField = findViewById<TextInputEditText>(R.id.exerciseNameInput)
