@@ -14,6 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 <!--    <style name="toolbartext" parent="TextAppearance.MaterialComponents.Button">-->
 <!--        <item name="android:textSize">16dp</item>-->
 <!--    </style>-->

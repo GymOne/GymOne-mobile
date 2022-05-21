@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_exercise.btnGoBackFromExercises
 import kotlinx.android.synthetic.main.activity_exercise.btnGoToCreateNewExercise
 import kotlinx.android.synthetic.main.create_new_exercise_layout.*
 import kotlinx.android.synthetic.main.fragment_exercises.*
+import kotlinx.android.synthetic.main.toolbar_exercises.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -46,6 +47,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.logging.Logger
+import androidx.appcompat.widget.Toolbar
 
 class ExerciseActivity : AppCompatActivity() {
 
@@ -58,6 +60,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         selectedDate = intent.getStringExtra("date").toString()
 
+        setSupportActionBar(toolbarExercise)
 
         var input = ""
         var myInputField = findViewById<TextInputEditText>(R.id.exerciseNameInput)
