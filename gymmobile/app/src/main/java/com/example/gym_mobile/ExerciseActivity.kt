@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.activity_exercise.btnGoBackFromExercises
 import kotlinx.android.synthetic.main.activity_exercise.btnGoToCreateNewExercise
 import kotlinx.android.synthetic.main.create_new_exercise_layout.*
 import kotlinx.android.synthetic.main.fragment_exercises.*
-import kotlinx.android.synthetic.main.toolbar_exercises.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -15,7 +15,7 @@
 
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarExercise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/teal_700"
@@ -38,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/button_bg"
+            android:theme="@style/AppTheme.Button"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
