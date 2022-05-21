@@ -12,6 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.gym_mobile.Dto.LoginDto
 import com.example.gym_mobile.Dto.SubmitFriendRequestDto
+import com.example.gym_mobile.Entities.FriendRequest
 import com.example.gym_mobile.Entities.Workout.WorkoutSession
 import com.example.gym_mobile.Model.User
 import com.example.gym_mobile.RecyclerAdapter.FriendRequestRecyclerAdapter
@@ -59,22 +60,22 @@ class FriendRequestFragment : Fragment() {
     private fun loadFriendRequests(){
         val friendRepo = ApiConnector.getInstance().create(FriendsRepo::class.java)
 
-        friendRepo.getFriendsByEmail(User.getUserEmail()).enqueue(object:
-            Callback<WorkoutSession> {
+        friendRepo.getFriendsReqWNames(User.getUserEmail()).enqueue(object:
+            Callback<List<FriendRequest>> {
             override fun onResponse(
-                call: Call<WorkoutSession>,
-                response: Response<WorkoutSession>
+                call: Call<List<FriendRequest>>,
+                response: Response<List<FriendRequest>>
 
             ) {
-                val session = response.body() as WorkoutSession
+                val listReq = response.body() as List<FriendRequest>
 
-                workoutExerciseAdapter.submitList(session.workouts)
-                workoutExerciseAdapter.notifyDataSetChanged()
+                friendRequestAdapter.assignListFriends(listReq)
+                friendRequestAdapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<WorkoutSession>, t: Throwable) {
-                workoutExerciseAdapter.submitList(emptyList())
-                workoutExerciseAdapter.notifyDataSetChanged()
+                friendRequestAdapter.assignListFriends(emptyList())
+                friendRequestAdapter.notifyDataSetChanged()
             }
         })
 

@@ -73,10 +73,7 @@ class FriendRequestRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         fun bind(friendRequest: FriendRequest){
-            if (friendRequest.senderId.equals(User.getUserEmail())){
-                friendName.setText(friendRequest.receiverId)
-            }
-            friendName.setText(friendRequest.senderId)
+            friendName.setText(friendRequest.name)
             val layoutInflater: LayoutInflater = LayoutInflater.from(context)
         }
     }
