@@ -152,7 +152,7 @@ class ExercisesFragment : Fragment() {
                 setResults("AddExcercise",exercise[position])
 
 //                var createWorkoutSessionDto = User.getUser()?.let { it1 -> CreateWorkoutSessionDto(it1.id, getSele) }
-                val workoutApi = ApiConnector.getInstance().create(WorkoutRepo::class.java)
+               // val workoutApi = ApiConnector.getInstance().create(WorkoutRepo::class.java)
 
                 GlobalScope.launch {
                     //val result = workoutApi.createWorkoutSession(createWorkoutSessionDto)
