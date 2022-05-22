@@ -34,8 +34,12 @@ class FriendRequestRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FriendRequestViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_friend_request_layout,parent,false),parent.context, acceptListener, declineListener
+        return FriendRequestRecyclerAdapter.FriendRequestViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.adapter_friend_request_layout,parent,false),
+            parent.context,
+            acceptListener,
+            declineListener
         )
     }
 

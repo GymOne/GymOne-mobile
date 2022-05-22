@@ -5,15 +5,21 @@
 
     <TextView
         android:id="@+id/tv_friends"
-        android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="100"
+        android:gravity="center"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="TextView"
         android:textAlignment="center"
-        android:text="TextView"  android:layout_width="wrap_content"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
         android:id="@+id/btn_unfriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
         android:text="Unfriend" />
 </LinearLayout>

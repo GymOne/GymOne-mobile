@@ -24,4 +24,7 @@ interface FriendsRepo {
 
     @POST("friend/removeRequest")
     suspend fun removeRequest(@Body submitFriendRequestDto: SubmitFriendRequestDto?) : Response<Any>
+//Maybe ??????
+    @POST("/friend/actionOnRequet")
+    suspend fun actionUponRequest(@Body actUponRequest: SubmitFriendRequestDto?) : Response<Any>
 }

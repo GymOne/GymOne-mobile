@@ -55,15 +55,15 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/adapter_exercise_layout.xml" value="0.13728470111448834" />
-        <entry key="app/src/main/res/layout/adapter_friend_request_layout.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/adapter_friends_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/adapter_friend_request_layout.xml" value="0.8548568725585938" />
+        <entry key="app/src/main/res/layout/adapter_friends_layout.xml" value="0.5081081081081081" />
         <entry key="app/src/main/res/layout/fragment_add_set.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/fragment_create_new_exercise.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/fragment_exercises.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/layout/fragment_friend_request.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_friend_request.xml" value="0.30358123779296875" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_tracking.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/layout/layout_workout_exercise_item.xml" value="0.13728470111448834" />
+        <entry key="app/src/main/res/layout/fragment_tracking.xml" value="0.40472564697265623" />
+        <entry key="app/src/main/res/layout/layout_workout_exercise_item.xml" value="0.1677824428137071" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.20729166666666668" />
       </map>
     </option>

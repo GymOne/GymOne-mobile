@@ -47,15 +47,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-        android:id="@+id/listViewFriendRequest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
-        </ListView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friend_req_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+        </androidx.recyclerview.widget.RecyclerView>
+<!--        <ListView-->
+<!--        android:id="@+id/listViewFriendRequest"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginBottom="10dp">-->
+<!--        </ListView>-->
 
         <Button
             android:id="@+id/btnCreateFriendRequest"

@@ -1,26 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="1dp"
+    app:cardPreventCornerOverlap="false">
 
-    <TextView
-        android:id="@+id/tv_friendRequest"
-        android:gravity="center"
-        android:layout_height="40dp"
-        android:layout_weight="100"
-        android:textAlignment="center"
-        android:text="TextView"  android:layout_width="wrap_content"/>
-
-    <Button
-        android:id="@+id/btn_removeReq"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remove" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_acceptReq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accept" />
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#EFEFEF"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_friendRequest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="Exercise Name"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <Button
+                        android:id="@+id/btn_removeReq"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginRight="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:text="X"
+                        android:textColor="#FF0000"
+                        android:textColorHighlight="#B69D9D"
+                        android:textColorLink="#B52828"
+                        android:textSize="8sp"
+                        app:iconTint="#911C1C" />
+
+                    <Button
+                        android:id="@+id/btn_acceptReq"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="56dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:text="Accept"
+                        android:textColor="#44D149"
+                        android:textColorHighlight="#B69D9D"
+                        android:textColorLink="#4CAF50"
+                        android:textSize="8sp"
+                        app:iconTint="#911C1C" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_friendRequest"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_weight="100"-->
+<!--        android:textAlignment="center"-->
+<!--        android:text="TextView"  android:layout_width="wrap_content"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_removeReq"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Remove" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_acceptReq"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Accept" />-->
+
+<!--</LinearLayout>-->
+
