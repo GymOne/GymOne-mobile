@@ -80,19 +80,19 @@ class ProfileFragment : Fragment() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val profilePicture = activity.findViewById<ImageView>(R.id.profilePicture)
-        val tvImageInfo = activity.findViewById<TextView>(R.id.imageInfo)
-        when (requestCode) {
-
-            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BY_FILE ->
-                if (resultCode == AppCompatActivity.RESULT_OK)
-                    showImageFromFile(profilePicture, tvImageInfo, mFile!!)
-                else handleOther(resultCode)
-
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        val profilePicture = activity.findViewById<ImageView>(R.id.profilePicture)
+//        val tvImageInfo = activity.findViewById<TextView>(R.id.imageInfo)
+//        when (requestCode) {
+//
+//            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BY_FILE ->
+//                if (resultCode == AppCompatActivity.RESULT_OK)
+//                    showImageFromFile(profilePicture, tvImageInfo, mFile!!)
+//                else handleOther(resultCode)
+//
+//        }
+//    }
 
     private fun handleOther(resultCode: Int) {
         if (resultCode == AppCompatActivity.RESULT_CANCELED)
