@@ -1,8 +1,10 @@
 package com.example.gym_mobile
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.gym_mobile.Dto.RegisterDto
 import com.example.gym_mobile.Repository.ApiConnector
 import com.example.gym_mobile.Repository.AuthRepo
@@ -11,7 +13,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -36,6 +37,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun goToLogin(){
-        startActivity(Intent(this, LoginActivity::class.java).apply {})
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("loginData",registerEmailInput.text.toString())
+        getResult.launch(intent)
     }
+
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) {}
 }
