@@ -35,6 +35,7 @@ class ProfileFragment : Fragment() {
     var mFile: File? = null
     lateinit var activity: MainActivity
     private lateinit var binding: ProfileFragment
+
     val btnOpenCamera = null
 
     override fun onCreateView(
