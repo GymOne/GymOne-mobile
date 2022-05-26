@@ -22,6 +22,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.example.gym_mobile.Dto.GetFilePathDto
+import com.example.gym_mobile.Dto.SavePathDto
+import com.example.gym_mobile.Entities.Exercise
+import com.example.gym_mobile.Model.User
+import com.example.gym_mobile.Repository.ApiConnector
+import com.example.gym_mobile.Repository.ExercisesRepo
+import com.example.gym_mobile.Repository.FriendsRepo
+import com.example.gym_mobile.Repository.UserRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -37,6 +51,8 @@ class ProfileFragment : Fragment() {
     var mFile: File? = null
     lateinit var activity: MainActivity
     private lateinit var binding: ProfileFragment
+    lateinit var userRepo: UserRepo
+    lateinit var profilePicture: ImageView
 
     val btnOpenCamera = null
 
@@ -48,15 +64,34 @@ class ProfileFragment : Fragment() {
 
         this.activity = context as MainActivity
         checkPermissions()
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_profile, container, false)
         val btnOpenCamera : Button = root.findViewById<Button>(R.id.btnOpenCamera)
         btnOpenCamera.setOnClickListener{
             onTakeByFile()
-//            println("clicked button 2")
-//            Toast.makeText(view?.context, "Button Clicked", Toast.LENGTH_LONG).show()
         }
+        profilePicture = root.findViewById<ImageView>(R.id.profilePicture)
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val email: String? = User.getUserEmail()
+        userRepo = ApiConnector.getInstance().create(UserRepo::class.java)
+        userRepo.getFilePath(email).enqueue(object:
+            Callback<GetFilePathDto> {
+            override fun onResponse(
+                call: Call<GetFilePathDto>,
+                response: Response<GetFilePathDto>
+            ) {
+                val dto : GetFilePathDto? = response.body()
+                val myF: File = File(dto?.path ?: "failed to fetch the file")
+                if (dto != null) {
+                    Log.d("TESTING ", dto.path)
+                }
+                profilePicture.setImageURI(Uri.fromFile(myF))
+            }
+            override fun onFailure(call: Call<GetFilePathDto>, t: Throwable) {
+            }
+            })
     }
 
     fun onTakeByFile() {
@@ -109,6 +144,11 @@ class ProfileFragment : Fragment() {
 
         //Todo for output
         //mImageView.setImageBitmap(bitmap)
+
+        val dto: SavePathDto? = User.getUserEmail()?.let { SavePathDto(it, f.toString()) }
+        CoroutineScope(Dispatchers.IO).launch {
+            userRepo.uploadPath(dto)
+        }
 
         val filePath: String = f.getPath()
         val bitmap = BitmapFactory.decodeFile(filePath)
