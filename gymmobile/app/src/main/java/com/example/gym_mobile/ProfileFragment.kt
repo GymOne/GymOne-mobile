@@ -4,14 +4,13 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +21,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ProfileFragment : Fragment() {
 
@@ -83,6 +85,7 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        println(data)
         val profilePicture = activity.findViewById<ImageView>(R.id.profilePicture)
         val tvImageInfo = activity.findViewById<TextView>(R.id.imageInfo)
         when (requestCode) {
@@ -103,8 +106,18 @@ class ProfileFragment : Fragment() {
 
     private fun showImageFromFile(img: ImageView, txt: TextView, f: File) {
         img.setImageURI(Uri.fromFile(f))
-        img.setBackgroundColor(Color.RED)
-        //mImage.setRotation(90);
+
+        //Todo for output
+        //mImageView.setImageBitmap(bitmap)
+
+        val filePath: String = f.getPath()
+        val bitmap = BitmapFactory.decodeFile(filePath)
+
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        val imageBytes = stream.toByteArray()
+
+        //api here
         txt.text = "File at:" + f.absolutePath + " - size = " + f.length()
     }
 
