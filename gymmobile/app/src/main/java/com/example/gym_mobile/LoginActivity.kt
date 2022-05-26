@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
 
         val email = intent.getSerializableExtra("loginData") as? String
 
+        loginEmailInput.setText(email)
+
         btnLogin.setOnClickListener {
             var loginDto = LoginDto(loginEmailInput.text.toString(), loginPasswordInput.text.toString() )
             val authAPi = ApiConnector.getInstance().create(AuthRepo::class.java)
